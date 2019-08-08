@@ -18,7 +18,7 @@ POMODORO_TODO_FILE="$POMODORO_LOG_DIRECTORY/TODO.txt"
 POMODORO_WORKING_TIME=25
 POMODORO_SHORT_RELAX_TIME=5
 POMODORO_LONG_RELAX_TIME=15
-# you can install get-shit-done at 
+# you can install get-shit-done at
 # http://github.com/yogsototh/get-shit-done.git
 # If you want to block some popular website
 # during your work session.
@@ -116,8 +116,8 @@ function pretimer() {
     local firsttime=1
     while (( m+s > 0 )); do
         ((s--))
-        if ((s<0)); then 
-            ((s=59)) 
+        if ((s<0)); then
+            ((s=59))
             ((m--))
         fi
         printf "$rem%02d:%02d" $m $s
@@ -125,7 +125,7 @@ function pretimer() {
             rem="\b\b\b\b\b"
             firsttime=0
         }
-        read -t 1 && { 
+        read -t 1 && {
             return 1
         }
     done
@@ -143,8 +143,8 @@ funtion posttimer() {
     notify "$message"
     while : ; do
         ((s++))
-        if ((s>59)); then 
-            ((s=0)) 
+        if ((s>59)); then
+            ((s=0))
             ((m++))
             notify "\r$message      "
         fi
@@ -160,7 +160,7 @@ funtion posttimer() {
 # If you had done some task this week
 # We help you find these
 function initLatestTasksFromLogFile() {
-    if [[ ! -r $logfile ]]; then 
+    if [[ ! -r $logfile ]]; then
         [[ ! -r $lastweeklogfile ]] && return
         latestlogfile="$lastweeklogfile"
     else
@@ -196,23 +196,23 @@ function initialize() {
         esac
         logfile=$logfiledir/$logfilename
 
-        while [[ ! -d $logfiledir ]]; do 
+        while [[ ! -d $logfiledir ]]; do
             print -- "$logfiledir does not exists. Would you want to create it? (y/n)"
             read answer
             case $answer in
                 Y|YES|y|yes) mkdir -p $logfiledir || exit 1;;
                 *) print -- "Enter a full path of directory to write logs or just enter NO to don't keep tasks."
                     read answer
-                    case $answer in 
+                    case $answer in
                         N|n|NO|no) logfiledir=/dev; logfile=/dev/null
                         ;;
-                        *)  logfiledir=$answer; 
+                        *)  logfiledir=$answer;
                             NO_LOGS=1;
                             logfile=$logfiledir/$logfilename ;;
                     esac
                     {
-                        print -- "logfiledir=$logfiledir" 
-                        (( NO_LOGS )) && print -- "NO_LOGS=1" 
+                        print -- "logfiledir=$logfiledir"
+                        (( NO_LOGS )) && print -- "NO_LOGS=1"
                     } > $HOME/.pomodoro
                     ;;
             esac
@@ -266,7 +266,7 @@ function askTitle() {
 # first 3 pauses are short ones
 # the 4th is a long one
 function compute_pause_time() {
-    if ((nb++ % 4 == 0)); then 
+    if ((nb++ % 4 == 0)); then
         notify "Long pause "
         POMODORO_RELAX_TIME=$POMODORO_LONG_RELAX_TIME
     else
