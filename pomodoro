@@ -17,7 +17,7 @@ POMODORO_TODO_FILE="$POMODORO_LOG_DIRECTORY/TODO.txt"
 # times are in minutes
 POMODORO_WORKING_TIME=25
 POMODORO_SHORT_RELAX_TIME=5
-POMODORO_LONG_RELAX_TIME=15
+POMODORO_LONG_RELAX_TIME=30
 # you can install get-shit-done at
 # http://github.com/yogsototh/get-shit-done.git
 # If you want to block some popular website
