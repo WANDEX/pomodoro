@@ -146,7 +146,7 @@ funtion posttimer() {
         if ((s>59)); then
             ((s=0))
             ((m++))
-            notify "\r$message      "
+            notify "$message"
         fi
         printf "$rem+%02d:%02d" $m $s
         (( $firsttime )) && {
