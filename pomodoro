@@ -79,12 +79,11 @@ notify() {
         Linux) # on Ubuntu => sudo apt-get install libnotify-bin
                # on other systems libnotify
                local DELAY=5 # in seconds
-               local ICON=/usr/share/icons/Tango/32x32/actions/appointment.png
                if has notify-send; then
                 notify-send \
                    --urgency=critical \
                    --expire-time=$(( DELAY * 1000 )) \
-                   --icon=$ICON "[Pomodoro] " $message
+                   "🍅 [Pomodoro] " $message
                fi
                ;;
         *) {
