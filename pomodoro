@@ -166,13 +166,13 @@ function initLatestTasksFromLogFile() {
     else
         latestlogfile="$logfile"
     fi
-    local cmd="latestTasks=( $( tail -n 5 $latestlogfile | awk '{printf "\""; gsub(/"/,"\\\""); gsub(/%/,"°/o"); for (i=6;i<=NF;i++) printf $i" "; print "\""}' ) )"
+    local cmd="latestTasks=( $(tail -n 5 $latestlogfile | awk '{printf "\""; gsub(/"/,"\\\""); gsub(/%/,"%%"); for (i=6;i<=NF;i++) printf $i" "; print "\""}') )"
     eval $cmd
 }
 
 function initTodoTasksFromFile() {
     [[ ! -r $POMODORO_TODO_FILE ]] && return
-    local cmd="todoTasks=( $(< $POMODORO_TODO_FILE | egrep -v '%(wait|done)' | awk '{printf "\""; gsub(/"/,"\\\""); gsub(/%/,"°/o"); printf $0; print "\""; }') )"
+    local cmd="todoTasks=( $(< $POMODORO_TODO_FILE | egrep -v '%(wait|done)' | awk '{printf "\""; gsub(/"/,"\\\""); gsub(/%/,"%%"); printf $0; print "\""; }') )"
     eval $cmd
 }
 
