@@ -145,7 +145,7 @@ funtion posttimer() {
         if ((s>59)); then
             ((s=0))
             ((m++))
-            notify "$message"
+            notify "\r$message      "
         fi
         printf "$rem+%02d:%02d" $m $s
         (( $firsttime )) && {
@@ -224,16 +224,16 @@ function initialize() {
 # ask the title of the tasks
 # And present previous tasks and TODO
 function askTitle() {
-    ((${#latestTasks})) && print -P -- "%Bworked tasks%b"
+    ((${#latestTasks})) && print -P -- "%S worked tasks %s"
     local i=1;
-    print
+    local bld=$'\e[0;1m'; itlq=$'\e[0;3m'; end=$'\e[0m'
     for task in $latestTasks; do
         print -- "$i) $task"
         ((i++))
     done
-    (( ${#todoTasks} > 0 )) && print -P -- "%BTODO%b"
+    (( ${#todoTasks} > 0 )) && print -P -- "%S TODO %s"
     for task in $todoTasks; do
-        print -P -- "%B$i) $task%b"
+        printf "${bld}%02d)${end} ${itlq}%s${end}\n" "$i" "$task"
         ((i++))
     done
     local choiceMsg=""
@@ -300,4 +300,5 @@ while (true) {
 
     pomodoro_pause_started
     timer $POMODORO_RELAX_TIME "Time to work!" pomodoro_pause_time_ended
+    print
 }
