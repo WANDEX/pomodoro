@@ -61,7 +61,8 @@ showConfMessage() {
 notify() {
     local message="$*"
 
-    print -n -- "$message"
+    print -nP -- "$message"
+    message=$(echo "$message" | sed "s/%[SsBb]//g" ) # remove for notify
     if [[ "$POMODORO_NOTIFY" != "" ]]; then
         eval $( echo $POMODORO_NOTIFY | sed 's/%m/"'$message'"/g' )
         return
@@ -228,7 +229,7 @@ function askTitle() {
     local i=1;
     local bld=$'\e[0;1m'; itlq=$'\e[0;3m'; end=$'\e[0m'
     for task in $latestTasks; do
-        print -- "$i) $task"
+        printf "%02d) %s\n" "$i" "$task"
         ((i++))
     done
     (( ${#todoTasks} > 0 )) && print -P -- "%S TODO %s"
@@ -239,7 +240,7 @@ function askTitle() {
     local choiceMsg=""
     ((i==2)) && choiceMsg=" (or 1)"
     ((i>2)) && choiceMsg=" (or 1 - $((i-1)))"
-    notify "Enter the title of the task${choiceMsg}: "
+    notify "%S Enter the title of the task %s%B${choiceMsg}:%b "
     read task
 
     # if the user returned a number
