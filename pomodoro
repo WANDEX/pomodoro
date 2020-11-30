@@ -234,7 +234,7 @@ function askTitle() {
     done
     (( ${#todoTasks} > 0 )) && print -P -- "%S TODO %s"
     for task in $todoTasks; do
-        printf "${bld}%02d)${end} ${itlq}%s${end}\n" "$i" "$task"
+        printf "${bld}%02d)${end} ${itlq}%s${end}\n" "$i" "$task "
         ((i++))
     done
     local choiceMsg=""
