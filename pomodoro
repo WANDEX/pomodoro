@@ -82,9 +82,8 @@ notify() {
                local DELAY=5 # in seconds
                if has notify-send; then
                 notify-send \
-                   --urgency=critical \
                    --expire-time=$(( DELAY * 1000 )) \
-                   "🍅 [Pomodoro] " $message
+                   "[pomodoro]" $message
                fi
                ;;
         *) {
